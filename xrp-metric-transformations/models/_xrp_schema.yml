@@ -1,0 +1,126 @@
+version: 2
+
+models:
+  - name: analytics__network_xrp__network_usage_metrics
+    description: "Network usage metrics table for XRP. Will roll up into aggregated Network Usage Metrics table."
+    columns: 
+      - &date
+        name: date
+        description: Date (format YYYY-MM-DD)
+        tests:
+          - unique
+          - not_null
+      - &network
+        name: network
+        description: The name of the network.
+        tests:
+          - accepted_values:
+              values: ['XRP']
+      - &slug
+        name: slug
+        description: The Messari slug of the network. Can differ from network name.
+        tests:
+          - accepted_values:
+              values: ['xrp']
+      - name: active_addresses
+        description: The number of unique addresses. Calculated as the number of unique addresses spending gas during the time period.
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+      - name: new_addresses
+        description: The daily number of unique first time gas spending addresses. A 'new address' is defined as a user that has never transacted on this blockchain. 
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+      - name: returning_addresses
+        description: The daily number of returning gas spending addresses. A 'returning address' is a user who has transacted on the blockchain previously.
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+      - name: total_transactions
+        description: The total number of transactions.
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+      - name: successful_transactions
+        description: The total number of successful transactions for this day.
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+      - name: unsuccessful_transactions
+        description: The total number of unsuccessful transactions for this day.
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+      - name: transaction_fees
+        description: Gas used for transactions in fee_token
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+      - name: transaction_fee_token
+        description: The token symbol of the token that transaction fees are paid in.
+        tests:
+          - accepted_values:
+              values: ['XRP']
+      - name: active_contracts
+        description: The number of unique contracts (escrows) that have been created but not fulfilled or expired.
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+      - name: total_contract_calls
+        description: NULL for XRP as there are no contract call functionalities.
+      - name: new_contracts_called 
+        description: NULL for XRP as there are no contract call functionalities.
+      - name: returning_contracts_called
+        description: NULL for XRP as there are no contract call functionalities.
+      - name: unique_contract_callers
+        description: NULL for XRP as there are no contract call functionalities.
+      - name: new_contracts_deployed
+        description: The number of new contracts (escrows) that have been deployed on that day.
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+  - name: analytics__network_xrp__consensus
+    description: Consensus metrics for XRP.
+    columns:
+      - *date
+      - *network
+      - *slug
+      - name: total_validators
+        description: >
+          Nodes that are actively participating in the network by validating transactions and maintaining the network's integrity. Total validator set, either hardcoded or derived from those active or eligible daily.
+          NULL in XRP because there are no validator or block producer info on-chain.
+      - name: total_block_producers
+        description: >
+          The number of validators that published blocks per day.
+          NULL in XRP because there are no validator or block producer info on-chain.
+      - name: total_stake
+        description: >
+          Total amount staked on the network.
+          NULL in XRP because it is not a proof-of-stake network.
+      - name: stake_token
+        description: >
+          The token symbol of the token that is staked on the network.
+          NULL in XRP because it is not a proof-of-stake network.
+      - name: estimated_nakamoto_coefficient
+        description: >
+          Nakamoto metric derived from the share of blocks authored in the given time period
+          NULL in XRP because there are no validator or block producer info on-chain.

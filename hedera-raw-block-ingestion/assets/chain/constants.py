@@ -1,0 +1,97 @@
+"""
+This file mainly stores the types ("names") of transactions that can is applicable in different situations, including downstream assets API calls or tests.
+It helps us manage what should be kept in the transactions dataframe and what to be filtered out,
+and prevents the chain.py file from being too complicated and hard to read.
+
+For downstream assets-related lists, the naming convention is: NAMES_FOR_<ASSET_TYPE>
+They are tested to be the only types of transactions that would return a result in the API call for that asset type.
+"""
+
+ALL_TRANSACTION_NAMES = [
+    "CONSENSUSCREATETOPIC",
+    "CONSENSUSDELETETOPIC",
+    "CONSENSUSSUBMITMESSAGE",
+    "CONSENSUSUPDATETOPIC",
+    "CONTRACTCALL",
+    "CONTRACTCREATEINSTANCE",
+    "CONTRACTDELETEINSTANCE",
+    "CONTRACTUPDATEINSTANCE",
+    "CRYPTOAPPROVEALLOWANCE",
+    "CRYPTOCREATEACCOUNT",
+    "CRYPTODELETE",
+    "CRYPTODELETEALLOWANCE",
+    "CRYPTOTRANSFER",
+    "CRYPTOUPDATEACCOUNT",
+    "ETHEREUMTRANSACTION",
+    "FILEAPPEND",
+    "FILECREATE",
+    "FILEDELETE",
+    "FILEUPDATE",
+    "FREEZE",
+    "NODESTAKEUPDATE",
+    "SCHEDULECREATE",
+    "SCHEDULEDELETE",
+    "SCHEDULESIGN",
+    "TOKENASSOCIATE",
+    "TOKENBURN",
+    "TOKENCREATION",
+    "TOKENDELETION",
+    "TOKENDISSOCIATE",
+    "TOKENFREESCHEDULEUPDATE",
+    "TOKENFREEZE",
+    "TOKENGRANTKYC",
+    "TOKENMINT",
+    "TOKENPAUSE",
+    "TOKENREVOKEKYC",
+    "TOKENUNFREEZE",
+    "TOKENUNPAUSE",
+    "TOKENUPDATE",
+    "TOKENWIPE",
+]
+
+NAMES_FOR_MESSAGES = [
+    "CONSENSUSSUBMITMESSAGE",
+]
+
+NAMES_FOR_TOKENS = [
+    "TOKENBURN",
+    "TOKENCREATION",
+    "TOKENDELETION",
+    "TOKENFEESCHEDULEUPDATE",
+    "TOKENMINT",
+    "TOKENPAUSE",
+    "TOKENUNPAUSE",
+    "TOKENUPDATE",
+    "TOKENWIPE",
+]
+
+NAMES_FOR_CONTRACTS = [
+    "CONTRACTCREATEINSTANCE",
+    "CONTRACTUPDATEINSTANCE",
+    "CONTRACTDELETEINSTANCE",
+]
+
+NAMES_FOR_CONTRACT_STATES = [
+    "CONTRACTCREATEINSTANCE",
+    "CONTRACTUPDATEINSTANCE",
+    "CONTRACTDELETEINSTANCE",
+    "CONTRACTCALL",
+]
+
+NAMES_FOR_CONTRACT_RESULTS = [
+    "CONTRACTCREATEINSTANCE",
+    "CONTRACTCALL",
+    "ETHEREUMTRANSACTION",
+]
+
+NAMES_FOR_CONTRACT_ACTIONS = [
+    "CONTRACTCREATEINSTANCE",
+    "CONTRACTCALL",
+    "ETHEREUMTRANSACTION",
+]
+
+NAMES_WITHOUT_TRANSFERS = [
+    "NODESTAKEUPDATE",
+    "FILEAPPEND",
+    "FREEZE",
+]
