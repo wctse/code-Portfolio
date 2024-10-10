@@ -7,9 +7,7 @@ This project is a boutique project to analyze whether a project is more likely t
 Fisher's Exact Test and Markov chain methods are used to analyze the data gathered from rekt and Defillama.
 
 ## Structure
-- [models/](./models/README.md) contains the logic for data transformation, focusing on all blockchain entities available from the XRP API.
-
-All codes in these directories are written by me.
+A single .ipynb file. All codes are written by me.
 
 ## Dependencies
 - pandas
